@@ -1,0 +1,43 @@
+---
+
+- name: Create openstack directory for clouds.yaml
+  file:
+    path: "{{ openstack_config_directory }}"
+    state: directory
+    owner: "{{ user }}"
+    group:  "{{ user }}"
+    mode: 0755
+
+- include_vars: 
+    file: "{{ openstack_config_directory }}/clouds.yaml" 
+    name: clouds
+
+- include_vars: 
+    file: "{{ openstack_config_directory }}/clouds-public.yaml" 
+    name: public_clouds
+
+- name: Add catalyst cloud to public-clouds
+  set_fact: 
+    public_clouds: "{{ public_clouds | combine({'public-clouds': public_cloud}, recursive=True) }}"
+
+- name: Add cloud tenant info to clouds
+  set_fact:
+    clouds: "{{ clouds | combine(cloud_config, recursive=True) }}"
+
+- name: Create clouds yaml file
+  copy:
+    dest: "{{ openstack_config_directory }}/clouds.yaml"
+    content: "{{ clouds | to_nice_yaml(indent=2) }}"
+    owner: "{{ user }}"
+    group:  "{{ user }}"
+    mode: 0655
+    backup: yes
+
+- name: Create clouds yaml file
+  copy:
+    dest: "{{ openstack_config_directory }}/clouds-public.yaml"
+    content: "{{ { 'public-clouds': public_cloud  } | to_nice_yaml(indent=2) }}"
+    owner: "{{ user }}"
+    group:  "{{ user }}"
+    mode: 0655
+    backup: yes

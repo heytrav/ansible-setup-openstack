@@ -1,0 +1,27 @@
+---
+openstack_config_directory: "/home/{{ user }}/.config/openstack"
+os_auth_url: https://api.cloud.catalyst.net.nz:5000/v3
+os_user_domain_name: Default
+os_project_domain_name: Default
+os_region_name: nz-por-1
+os_interface: public
+
+cloud_profile:
+  profile: catalystcloud
+  auth:
+    username: "{{ os_username }}"
+    password: "{{ os_password }}"
+    project_name: "{{ os_project_name }}"
+    auth_url: "{{ os_auth_url }}" 
+    user_domain_name: "{{ os_user_domain_name }}"
+    project_domain_name: "{{ os_project_domain_name }}"
+  region_name: "{{ os_region_name }}" 
+  interface: "{{ os_interface }}"
+
+cloud_config:
+  clouds: "{{ {cloud_name: cloud_profile} }}"
+
+public_cloud:        
+  catalystcloud:
+    auth:
+      auth_url: "{{ os_auth_url }}" 
