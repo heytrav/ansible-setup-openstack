@@ -4,8 +4,8 @@
   file:
     path: "{{ openstack_config_directory }}"
     state: directory
-    owner: "{{ user }}"
-    group:  "{{ user }}"
+    owner: "{{ ssh_user }}"
+    group:  "{{ ssh_user }}"
     mode: 0755
 
 - include_vars: 
@@ -28,8 +28,8 @@
   copy:
     dest: "{{ openstack_config_directory }}/clouds.yaml"
     content: "{{ clouds | to_nice_yaml(indent=2) }}"
-    owner: "{{ user }}"
-    group:  "{{ user }}"
+    owner: "{{ ssh_user }}"
+    group:  "{{ ssh_user }}"
     mode: 0655
     backup: yes
 
@@ -37,7 +37,7 @@
   copy:
     dest: "{{ openstack_config_directory }}/clouds-public.yaml"
     content: "{{ { 'public-clouds': public_cloud  } | to_nice_yaml(indent=2) }}"
-    owner: "{{ user }}"
-    group:  "{{ user }}"
+    owner: "{{ ssh_user }}"
+    group:  "{{ ssh_user }}"
     mode: 0655
     backup: yes
