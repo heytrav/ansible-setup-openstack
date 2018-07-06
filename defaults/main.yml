@@ -1,5 +1,5 @@
 ---
-openstack_config_directory: "/home/{{ user }}/.config/openstack"
+openstack_config_directory: "/home/{{ ssh_user }}/.config/openstack"
 os_auth_url: https://api.cloud.catalyst.net.nz:5000/v3
 os_user_domain_name: Default
 os_project_domain_name: Default
