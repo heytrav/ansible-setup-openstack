@@ -36,7 +36,7 @@
 - name: Create clouds yaml file
   copy:
     dest: "{{ openstack_config_directory }}/clouds-public.yaml"
-    content: "{{ { 'public-clouds': public_cloud  } | to_nice_yaml(indent=2) }}"
+    content: "{{ public_clouds | to_nice_yaml(indent=2) }}"
     owner: "{{ ssh_user }}"
     group:  "{{ ssh_user }}"
     mode: 0655
