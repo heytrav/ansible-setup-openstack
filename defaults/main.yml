@@ -8,10 +8,11 @@ os_interface: public
 
 default_profile: catalystcloud
 default_cloud_name: openstack
-cloud_name: "{{ cloud | default_cloud_name }}"
+cloud: "{{ cloud_name | default(default_cloud_name) }}"
+profile:  "{{ profile_name | default(default_profile) }}"
 
 cloud_profile:
-  profile: "{{ profile_name | default(default_profile) }}"
+  profile: "{{ profile }}"
   auth:
     username: "{{ os_username }}"
     password: "{{ os_password }}"
@@ -23,10 +24,10 @@ cloud_profile:
   interface: "{{ os_interface }}"
 
 cloud_config:
-  clouds: "{{ {cloud_name: cloud_profile} }}"
+  clouds: "{{ {cloud: cloud_profile} }}"
 
 public_cloud_auth: 
   auth:
     auth_url: "{{ os_auth_url }}" 
 
-public_cloud: "{{ {profile_name: public_cloud_auth} }}"        
+public_cloud: "{{ {profile: public_cloud_auth} }}"        
