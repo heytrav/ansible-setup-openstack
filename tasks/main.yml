@@ -10,7 +10,7 @@
 
 - name: Touch files to make sure they exist
   file:
-    path: "{{ openstack_config_directory }}/{{ item }}.yaml" 
+    path: "{{ openstack_config_directory }}/{{ item }}" 
     owner: "{{ ssh_user }}"
     group:  "{{ ssh_user }}"
   with_items:
