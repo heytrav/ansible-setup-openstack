@@ -8,7 +8,7 @@
     group:  "{{ ssh_user }}"
     mode: 0755
 
-- name: Touch files to make sure they exist
+- name: Touch cloud config files to make sure they exist
   file:
     path: "{{ openstack_config_directory }}/{{ item }}" 
     owner: "{{ ssh_user }}"
