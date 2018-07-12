@@ -8,6 +8,15 @@
     group:  "{{ ssh_user }}"
     mode: 0755
 
+- name: Touch files to make sure they exist
+  file:
+    path: "{{ openstack_config_directory }}/{{ item }}.yaml" 
+    owner: "{{ ssh_user }}"
+    group:  "{{ ssh_user }}"
+  with_items:
+    - clouds.yaml
+    - clouds-public.yaml
+
 - include_vars: 
     file: "{{ openstack_config_directory }}/clouds.yaml" 
     name: clouds
