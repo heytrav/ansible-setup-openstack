@@ -21,10 +21,14 @@
 - include_vars: 
     file: "{{ openstack_config_directory }}/clouds.yaml" 
     name: clouds
+  tags:
+    - read-cloud-vars
 
 - include_vars: 
     file: "{{ openstack_config_directory }}/clouds-public.yaml" 
     name: public_clouds
+  tags:
+    - read-cloud-vars
 
 - name: Add catalyst cloud to public-clouds
   set_fact: 

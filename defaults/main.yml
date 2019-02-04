@@ -6,6 +6,8 @@ os_project_domain_name: Default
 os_region_name: nz-por-1
 os_interface: public
 
+clouds: {}
+public_clouds: {}
 default_profile: catalystcloud
 default_cloud_name: openstack
 cloud: "{{ cloud_name | default(default_cloud_name) }}"
