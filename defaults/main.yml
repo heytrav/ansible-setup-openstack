@@ -27,6 +27,8 @@ cloud_profile:
 
 cloud_config:
   clouds: "{{ {cloud: cloud_profile} }}"
+  ansible:
+    expand_hostvars: no
 
 public_cloud_auth: 
   auth:
